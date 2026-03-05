@@ -5,6 +5,10 @@ public class Activity1 extends IntegerManager implements PrintPretty{
         thing.printPretty();
         thing.shuffle();
         thing.printPretty();
+        thing.selectionSort();
+        thing.printPretty();
+        thing.selectionSort(true);
+        thing.printPretty();
     }
 
     @Override
@@ -45,10 +49,40 @@ public class Activity1 extends IntegerManager implements PrintPretty{
         throw new UnsupportedOperationException("Unimplemented method 'insertionSort'");
     }
 
+    void selectionSort (boolean highToLow){
+        if(!highToLow) { selectionSort();
+            return;
+        }
+        // outer loop - STOP ONE EARLY DO INNER DOESN'T GO OUT OF BOUNDS
+        for(int outer = 0; outer < nums.length - 1; outer++){
+            // find the smallest
+            int largest_index = outer;
+            // inner loop to search for largest. Can we find something smaller?
+            for(int inner = outer + 1; inner < nums.length; inner++){
+                if(nums[inner] > nums[largest_index]) largest_index = inner;
+            }
+            // three part swap [outer] loop with [smallest_index]
+            int temp = nums[largest_index];
+            nums[largest_index] = nums[outer];
+            nums[outer] = temp;
+        }
+    }
+
     @Override
     void selectionSort() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'selectionSort'");
+        // outer loop - STOP ONE EARLY DO INNER DOESN'T GO OUT OF BOUNDS
+        for(int outer = 0; outer < nums.length - 1; outer++){
+            // find the smallest
+            int smallest_index = outer;
+            // inner loop to search for smallest. Can we find something smaller?
+            for(int inner = outer + 1; inner < nums.length; inner++){
+                if(nums[inner] < nums[smallest_index]) smallest_index = inner;
+            }
+            // three part swap [outer] loop with [smallest_index]
+            int temp = nums[smallest_index];
+            nums[smallest_index] = nums[outer];
+            nums[outer] = temp;
+        }
     }
 
     @Override
