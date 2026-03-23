@@ -7,8 +7,12 @@ public class Activity1 extends IntegerManager implements PrintPretty{
         thing.printPretty();
         thing.selectionSort();
         thing.printPretty();
-        thing.selectionSort(true);
+        //thing.selectionSort(true);
         thing.printPretty();
+        thing.shuffle();
+        thing.insertionSort();
+        thing.printPretty();
+        thing.insertionSort(true); // high to low results
     }
 
     @Override
@@ -45,26 +49,36 @@ public class Activity1 extends IntegerManager implements PrintPretty{
 
     @Override
     void insertionSort() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insertionSort'");
+        //outer loop
+        for(int j = 1; j < nums.length; j++){
+            int temp = nums[j]; // Will steals souls
+            //while loop that goes backwards\
+            int i = j - 1; // spawns Owen
+            while(i > -1 && nums[i] > temp){
+                // shift over
+                nums[i + 1] = nums[i]; // drag out the swap 
+                i--;
+            }
+            nums[i + 1] = temp; // complete the three-part-swap
+        }
     }
-
-    void selectionSort (boolean highToLow){
-        if(!highToLow) { selectionSort();
+    @Override
+    void insertionSort(boolean highToLow){
+        if(!highToLow){
+            insertionSort();
             return;
         }
-        // outer loop - STOP ONE EARLY DO INNER DOESN'T GO OUT OF BOUNDS
-        for(int outer = 0; outer < nums.length - 1; outer++){
-            // find the smallest
-            int largest_index = outer;
-            // inner loop to search for largest. Can we find something smaller?
-            for(int inner = outer + 1; inner < nums.length; inner++){
-                if(nums[inner] > nums[largest_index]) largest_index = inner;
+        //outer loop
+        for(int j = 1; j < nums.length; j++){
+            int temp = nums[j]; // Will steals souls
+            //while loop that goes backwards\
+            int i = j - 1; // spawns Owen
+            while(i > -1 && nums[i] < temp){
+                // shift over
+                nums[i + 1] = nums[i]; // drag out the swap 
+                i--;
             }
-            // three part swap [outer] loop with [smallest_index]
-            int temp = nums[largest_index];
-            nums[largest_index] = nums[outer];
-            nums[outer] = temp;
+            nums[i + 1] = temp; // complete the three-part-swap
         }
     }
 
