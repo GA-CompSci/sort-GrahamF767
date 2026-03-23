@@ -13,6 +13,7 @@ public class Activity1 extends IntegerManager implements PrintPretty{
         thing.insertionSort();
         thing.printPretty();
         thing.insertionSort(true); // high to low results
+        thing.printPretty();
     }
 
     @Override
@@ -62,7 +63,6 @@ public class Activity1 extends IntegerManager implements PrintPretty{
             nums[i + 1] = temp; // complete the three-part-swap
         }
     }
-    @Override
     void insertionSort(boolean highToLow){
         if(!highToLow){
             insertionSort();
@@ -71,7 +71,7 @@ public class Activity1 extends IntegerManager implements PrintPretty{
         //outer loop
         for(int j = 1; j < nums.length; j++){
             int temp = nums[j]; // Will steals souls
-            //while loop that goes backwards\
+            //while loop that goes backwards
             int i = j - 1; // spawns Owen
             while(i > -1 && nums[i] < temp){
                 // shift over

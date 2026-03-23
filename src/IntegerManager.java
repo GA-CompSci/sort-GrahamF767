@@ -21,4 +21,9 @@ abstract class IntegerManager {
 
     /** Returns a random integer from the nums list */
     abstract int pickRandom();
+
+    void insertionSort(boolean highToLow) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'insertionSort'");
+    }
 }
