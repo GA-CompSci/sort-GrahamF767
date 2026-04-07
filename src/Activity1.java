@@ -5,14 +5,16 @@ public class Activity1 extends IntegerManager implements PrintPretty{
         thing.printPretty();
         thing.shuffle();
         thing.printPretty();
-        thing.selectionSort();
-        thing.printPretty();
-        //thing.selectionSort(true);
-        thing.printPretty();
-        thing.shuffle();
-        thing.insertionSort();
-        thing.printPretty();
-        thing.insertionSort(true); // high to low results
+        // thing.selectionSort();
+        // thing.printPretty();
+        // thing.selectionSort(true);
+        // thing.printPretty();
+        // thing.shuffle();
+        // thing.insertionSort();
+        // thing.printPretty();
+        // thing.insertionSort(true); // high to low results
+        // thing.printPretty();
+        thing.mergeSort(thing.nums);
         thing.printPretty();
     }
 
@@ -50,6 +52,7 @@ public class Activity1 extends IntegerManager implements PrintPretty{
 
     @Override
     void insertionSort() {
+        // VERBOSE SORT 0 (Extra outputs)
         //outer loop
         for(int j = 1; j < nums.length; j++){
             int temp = nums[j]; // Will steals souls
@@ -60,7 +63,10 @@ public class Activity1 extends IntegerManager implements PrintPretty{
                 nums[i + 1] = nums[i]; // drag out the swap 
                 i--;
             }
-            nums[i + 1] = temp; // complete the three-part-swap
+            nums[i + 1] = temp; // complete the three-part-swap\
+            // here comes the verbose part
+            System.out.println("\n PASS # " + j);
+            printPretty();
         }
     }
     void insertionSort(boolean highToLow){
@@ -79,6 +85,7 @@ public class Activity1 extends IntegerManager implements PrintPretty{
                 i--;
             }
             nums[i + 1] = temp; // complete the three-part-swap
+            
         }
     }
 
@@ -100,9 +107,47 @@ public class Activity1 extends IntegerManager implements PrintPretty{
     }
 
     @Override
-    void mergeSort() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mergeSort'");
+    void mergeSort(int[] nums) {
+        //base case
+        int n = nums.length;
+        if(nums.length <= 1)  return;
+        // split in half
+        int mid = n / 2; 
+        int[] l = new int[mid];
+        int[] r = new int[n - mid];
+        for(int i = 0; i < mid; i++){
+            l[i] = nums[i];
+        }
+        for(int i = mid; i < n; i++){
+            // subtracting mid to offset
+            r[i - mid] = nums[i];
+        }
+        mergeSort(l);
+        mergeSort(r);
+
+        // you can't get to this next line until the base case hits
+        merge(nums, l, r, mid, n - mid);
+    }
+
+    void merge(int[] nums, int[] l, int[] r, int left, int right){
+        // need a bunch of counters ( i = left, j = right, k = nums)
+        int i = 0, j = 0, k = 0;
+        while(i < left && j < right){
+            if(l[i] <= r[j]) {
+                nums[k++] = l[i++];
+            }
+            else {
+                nums[k++] = r[j++];
+            }
+        }
+        // theres only left remmaining
+        while(i < left) {
+            nums[k++] = l[i++];
+        }
+        //theres only right remaining
+        while(j < right) {
+            nums[k++] = r[j++];
+        }
     }
 
     @Override
